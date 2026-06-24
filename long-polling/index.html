@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Long Polling Demo</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+
+<h2>Long Polling Demo</h2>
+<div id="result">Waiting for new messages...</div>
+
+<script>
+
+function getMessage() {
+
+    $.ajax({
+        url: "longpoll.php",
+
+        success: function(data) {
+
+            $("#result").html(data);
+
+            getMessage();
+        },
+
+        error: function() {
+
+            setTimeout(getMessage, 1000);
+        }
+    });
+}
+
+getMessage();
+
+</script>
+
+</body>
+</html>
